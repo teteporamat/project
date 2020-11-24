@@ -51,6 +51,21 @@ class Firestore {
     console.log("func: Firestore/get_post_store pass");
   };
 
+  get_init = async (accept, reject) => {
+    console.log("func: Firestore/get_init");
+    firebase
+      .firestore()
+      .collection("users")
+      .get()
+      .then(function (querySnapshot) {
+        accept(querySnapshot);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+    console.log("func: Firestore/get_init pass");
+  };
+
   add_post_store = async (post, accept, reject) => {
     console.log("func: Firestore/add_post_store");
     post.date = firebase.firestore.FieldValue.serverTimestamp();
@@ -138,6 +153,28 @@ class Firestore {
         reject(err);
       });
     console.log("func: Firestore/update_post_share pass");
+  };
+
+  update_users = (id, name, password, accept, reject) => {
+    console.log("func: Firestore/update_users");
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(id)
+      .set(
+        {
+          name: name,
+          password: password,
+        },
+        { merge: true }
+      )
+      .then(function () {
+        accept(doc);
+      })
+      .catch(function (err) {
+        reject(err);
+      });
+    console.log("func: Firestore/update_users pass");
   };
 }
 

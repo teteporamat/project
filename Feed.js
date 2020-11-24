@@ -18,8 +18,9 @@ class Feed extends Component {
     this.state = { posts: [], count: 0, name: "A" };
 
     const { route } = this.props;
+    this.id = route.params.id;
     this.name = route.params.name;
-    // console.log(this.name);
+    console.log(this.id);
   }
 
   accept_storage = (querySnapshot) => {
@@ -107,6 +108,7 @@ class Feed extends Component {
   Header = () => {
     return (
       <View style={styles.header}>
+        <Text>Feed</Text>
         <TouchableOpacity
           style={{
             backgroundColor: "gray",
@@ -114,7 +116,9 @@ class Feed extends Component {
             height: "100%",
           }}
           onPress={this.call}
-        ></TouchableOpacity>
+        >
+          <Text>Call</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
             backgroundColor: "lime",
@@ -122,7 +126,9 @@ class Feed extends Component {
             height: "100%",
           }}
           onPress={this.check}
-        ></TouchableOpacity>
+        >
+          <Text>Check</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
             backgroundColor: "orange",
@@ -132,7 +138,9 @@ class Feed extends Component {
           onPress={() => {
             this.props.navigation.navigate("Feed");
           }}
-        ></TouchableOpacity>
+        >
+          <Text>Feed</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
             backgroundColor: "pink",
@@ -141,19 +149,39 @@ class Feed extends Component {
           }}
           onPress={() => {
             this.props.navigation.navigate("Post", {
+              id: this.id,
+              name: this.name,
               count: this.state.count,
+            });
+          }}
+        >
+          <Text>Post</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={() => {
+            this.props.navigation.navigate("Edit", {
+              id: this.id,
               name: this.name,
             });
           }}
-        ></TouchableOpacity>
+        >
+          <Text>Edit</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: "blue",
+            backgroundColor: "cyan",
             width: 50,
             height: "100%",
           }}
           onPress={this.reload}
-        ></TouchableOpacity>
+        >
+          <Text>Reload</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -253,6 +281,7 @@ const styles = StyleSheet.create({
     height: 70,
     borderBottomWidth: 1,
     borderBottomColor: "gray",
+    marginTop: 50,
   },
   icon_like: {
     backgroundColor: "lime",

@@ -9,6 +9,7 @@ import { useRoute } from "@react-navigation/native";
 import Feed from "./Feed";
 import Post from "./Post";
 import Init from "./Init";
+import Edit from "./Edit";
 
 const InitScreen = () => {
   const navigation = useNavigation();
@@ -25,6 +26,12 @@ const PostScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   return <Post navigation={navigation} route={route} />;
+};
+
+const EditScreen = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  return <Edit navigation={navigation} route={route} />;
 };
 
 const Stack = createStackNavigator();
@@ -45,6 +52,11 @@ const MyStack = () => {
         name="Post"
         component={PostScreen}
         options={{ headerShown: false, title: "Post" }}
+      />
+      <Stack.Screen
+        name="Edit"
+        component={EditScreen}
+        options={{ headerShown: false, title: "Edit" }}
       />
     </Stack.Navigator>
   );

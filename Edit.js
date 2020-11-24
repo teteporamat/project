@@ -14,80 +14,37 @@ import * as ImagePicker from "expo-image-picker";
 
 import firestore from "./firebase/Firestore";
 
-class Feed extends Component {
+class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { image: "" };
+    this.state = { id: null, name: null, password: null };
 
     const { route } = this.props;
     this.id = route.params.id;
     this.name = route.params.name;
-    this.count = route.params.count + 1;
     console.log(this.id);
   }
 
-  accept_add_storage = async (querySnapshot) => {
-    console.log("func: Post/accept_add_storage");
-    console.log("\n" + this.state.image + "\n");
-    await this.setState({ image: querySnapshot });
-    await console.log("\n" + this.state.image + "\n");
-    console.log("func: Post/accept_add_storage pass");
-  };
-
-  accept_get_storage = (querySnapshot) => {
-    console.log("func: Post/accept_get_storage");
-    console.log("func: Post/accept_get_storage pass");
-  };
-
-  accept_add_store = (querySnapshot) => {
-    console.log("func: Post/accept_add_store");
-    console.log("func: Post/accept_add_store pass");
-  };
+  accept = async (querySnapshot) => {};
 
   reject = (error) => {};
 
   componentDidMount() {
-    console.log("func: Post/componentDidMount");
-    console.log("func: Post/componentDidMount pass");
+    console.log("func: Edit/componentDidMount");
+    console.log("func: Edit/componentDidMount pass");
   }
 
-  uploadImage = async () => {
-    console.log("func: Post/uploadImage");
-    await firestore.add_post_storage(
-      this.state.image,
-      this.count,
-      this.accept_add_storage,
+  on_change = () => {
+    console.log("func: Edit/on_change");
+    console.log(this.state.name + " " + this.state.password);
+    firestore.update_users(
+      this.id,
+      this.state.name,
+      this.state.password,
+      this.accept,
       this.reject
     );
-    await firestore.get_post_storage(
-      this.count,
-      this.accept_get_storage,
-      this.reject
-    );
-    console.log("\n" + this.state.image + "\n");
-    let datas = await {
-      name: this.name,
-      uri: this.state.image,
-      like: 0,
-      share: 0,
-    };
-    await firestore.add_post_store(datas, this.accept_add_store, this.reject);
-    console.log("func: Post/uploadImage pass");
-  };
-
-  pick_image = async () => {
-    console.log("func: Post/pick_image");
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      console.log(result.uri);
-      this.setState({ image: result.uri });
-    }
-    console.log("func: Post/pick_image pass");
+    console.log("func: Edit/on_change pass");
   };
 
   call = () => {
@@ -95,13 +52,14 @@ class Feed extends Component {
   };
 
   check = () => {
-    console.log(this.state.image);
+    console.log(this.state.name);
+    console.log(this.state.password);
   };
 
   Header = () => {
     return (
       <View style={styles.header}>
-        <Text>Post</Text>
+        <Text>Edit</Text>
         <TouchableOpacity
           style={{
             backgroundColor: "gray",
@@ -198,11 +156,19 @@ class Feed extends Component {
         <this.Header />
         <View style={{ flex: 1 }}>
           <View style={styles.content}>
-            <TouchableOpacity onPress={this.pick_image}>
-              <Text style={{ fontSize: 15 }}>Choose Image</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={this.uploadImage}>
-              <Text style={{ fontSize: 15 }}>Upload Image</Text>
+            <Text>Name</Text>
+            <TextInput
+              style={styles.text_input}
+              onChangeText={(text) => this.setState({ name: text })}
+            />
+            <Text>Password</Text>
+            <TextInput
+              style={styles.text_input}
+              onChangeText={(text) => this.setState({ password: text })}
+              secureTextEntry={true}
+            />
+            <TouchableOpacity onPress={this.on_change}>
+              <Text>Change</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -236,6 +202,9 @@ const styles = StyleSheet.create({
   icon_like: {
     backgroundColor: "lime",
   },
+  text_input: {
+    backgroundColor: "#bbb",
+  },
 });
 
-export default Feed;
+export default Edit;
