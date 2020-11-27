@@ -193,12 +193,9 @@ class Feed extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.name}>{item.name}</Text>
-        <Image
-          source={{
-            uri: item.uri,
-          }}
-          style={styles.image}
-        />
+        <View style={{paddingLeft:10,paddingRight:10}}>
+          <Image source={{ uri: item.uri,}} style={styles.image}/>
+        </View>
         <View style={styles.box}>
           <TouchableOpacity style={styles.icon_left} onPress={() => {
               firestore.update_post_like(
@@ -208,7 +205,7 @@ class Feed extends Component {
                 this.reject
               );
               firestore.get_post_store(this.accept_store, this.reject);
-            }}>
+          }}>
             <Text><FontAwesome5 name="ghost" size={24} color="black" />{item.like}</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -235,6 +232,7 @@ class Feed extends Component {
       <View
         style={{
           height: 10,
+          backgroundColor:"black",
         }}
       />
     );
@@ -298,17 +296,21 @@ const styles = StyleSheet.create({
     color:"white",
   },
   icon_left: {
-    backgroundColor: "lime",
+    backgroundColor: "#18F438",
+    height:30,
     flex: 1,
     flexDirection:"row",
     justifyContent:"center",
-    marginLeft: 20,
+    borderBottomLeftRadius:5,
+    marginLeft:10,
   },
   icon_right: {
-    backgroundColor: "cyan",
+    backgroundColor: "#696969",
+    height:30,
     flex: 1,
     flexDirection: "row-reverse",
-    marginLeft: 20,
+    borderBottomRightRadius:5,
+    marginLeft:10,
   },
 });
 
