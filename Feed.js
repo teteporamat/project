@@ -10,7 +10,7 @@ import {
   Dimensions,
 } from "react-native";
 
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import firestore from "./firebase/Firestore";
 
@@ -111,33 +111,15 @@ class Feed extends Component {
   Header = () => {
     return (
       <View style={styles.header}>
-        <Text>Feed</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "gray",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={this.call}
-        >
+        <Text style={styles.header_text}>Feed</Text>
+        <TouchableOpacity style={styles.header_button} onPress={this.call}>
           <Text>Call</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "lime",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={this.check}
-        >
+        <TouchableOpacity style={styles.header_button} onPress={this.check}>
           <Text>Check</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            backgroundColor: "orange",
-            width: 50,
-            height: "100%",
-          }}
+          style={styles.header_button}
           onPress={() => {
             this.props.navigation.navigate("Feed");
           }}
@@ -145,11 +127,7 @@ class Feed extends Component {
           <Text>Feed</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            backgroundColor: "pink",
-            width: 50,
-            height: "100%",
-          }}
+          style={styles.header_button}
           onPress={() => {
             this.props.navigation.navigate("Post", {
               id: this.id,
@@ -161,11 +139,7 @@ class Feed extends Component {
           <Text>Post</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            backgroundColor: "white",
-            width: 50,
-            height: "100%",
-          }}
+          style={styles.header_button}
           onPress={() => {
             this.props.navigation.navigate("Edit", {
               id: this.id,
@@ -175,14 +149,7 @@ class Feed extends Component {
         >
           <Text>Edit</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "cyan",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={this.reload}
-        >
+        <TouchableOpacity style={styles.header_button} onPress={this.reload}>
           <Text>Reload</Text>
         </TouchableOpacity>
       </View>
@@ -193,11 +160,13 @@ class Feed extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.name}>{item.name}</Text>
-        <View style={{paddingLeft:10,paddingRight:10}}>
-          <Image source={{ uri: item.uri,}} style={styles.image}/>
+        <View>
+          <Image source={{ uri: item.uri }} style={styles.image} />
         </View>
         <View style={styles.box}>
-          <TouchableOpacity style={styles.icon_left} onPress={() => {
+          <TouchableOpacity
+            style={styles.icon_left}
+            onPress={() => {
               firestore.update_post_like(
                 item.id,
                 item.like,
@@ -205,8 +174,12 @@ class Feed extends Component {
                 this.reject
               );
               firestore.get_post_store(this.accept_store, this.reject);
-          }}>
-            <Text><FontAwesome5 name="ghost" size={24} color="black" />{item.like}</Text>
+            }}
+          >
+            <Text>
+              <FontAwesome5 name="ghost" size={24} color="black" />
+              {item.like}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.icon_right}
@@ -231,8 +204,8 @@ class Feed extends Component {
     return (
       <View
         style={{
-          height: 10,
-          backgroundColor:"black",
+          backgroundColor: "black",
+          height: 20,
         }}
       />
     );
@@ -243,7 +216,7 @@ class Feed extends Component {
     return (
       <View style={{ flex: 1 }}>
         <this.Header />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: "black", paddingTop: 20 }}>
           <View style={styles.content}>
             <FlatList
               data={this.state.posts}
@@ -263,54 +236,67 @@ class Feed extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    // backgroundColor: "#555",
     flex: 1,
-    backgroundColor:"black"
+    width: "90%",
+    alignSelf: "center",
   },
   content: {
+    backgroundColor: "black",
     flex: 1,
   },
   image: {
-    width: "100%",
+    // width: "100%",
     height: Math.round(Dimensions.get("window").height) / 2,
-    backgroundColor: "#dddddd",
   },
   header: {
-    flexDirection: "row",
     backgroundColor: "#FFFFFF",
+    flexDirection: "row",
     alignItems: "center",
     height: 70,
     borderBottomWidth: 1,
     borderBottomColor: "gray",
     marginTop: 50,
   },
+  header_text: {
+    backgroundColor: "green",
+    flex: 1,
+    borderRadius: 50,
+  },
+  header_button: {
+    backgroundColor: "green",
+    flex: 1,
+    borderRadius: 50,
+  },
   box: {
-    flex: 2,
-    justifyContent:"space-between",
+    flex: 1,
+    justifyContent: "space-between",
     flexDirection: "row",
-    height: 50,
   },
   name: {
-    marginLeft: 20,
-    fontFamily: 'sans-serif-medium',
-    fontSize:18,
-    color:"white",
+    backgroundColor: "gray",
+    paddingLeft: 30,
+    fontFamily: "sans-serif-medium",
+    fontSize: 18,
+    color: "white",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
   },
   icon_left: {
     backgroundColor: "#18F438",
-    height:30,
+    height: 30,
     flex: 1,
-    flexDirection:"row",
-    justifyContent:"center",
-    borderBottomLeftRadius:5,
-    marginLeft:10,
+    flexDirection: "row",
+    justifyContent: "center",
+    borderBottomLeftRadius: 50,
   },
   icon_right: {
     backgroundColor: "#696969",
-    height:30,
+    height: 30,
     flex: 1,
     flexDirection: "row-reverse",
-    borderBottomRightRadius:5,
-    marginLeft:10,
+    justifyContent: "center",
+    borderBottomRightRadius: 50,
   },
 });
 
