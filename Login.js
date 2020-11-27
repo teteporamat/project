@@ -74,7 +74,7 @@ class Login extends Component {
     this.state.users.forEach((element) => {
       console.log("Check: " + this.state.email + " & " + element.email);
       if (element.email === this.state.email) {
-        console.log("\n old guy\n");
+        console.log("\nold guy\n");
         this.setState({ id: element.id });
         this.setState({ name: element.name });
         this.setState({ auth_first: false });
@@ -107,32 +107,116 @@ class Login extends Component {
   };
 
   Header = () => {
-    return <View style={styles.header}></View>;
+    return (
+      <View style={styles.header}>
+        <Text>Edit</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "gray",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={this.call}
+        >
+          <Text>Call</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "lime",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={this.check}
+        >
+          <Text>Check</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "orange",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={() => {
+            this.props.navigation.navigate("Feed", {
+              id: this.id,
+              name: this.name,
+            });
+          }}
+        >
+          <Text>Feed</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "pink",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={() => {
+            this.props.navigation.navigate("Post", {
+              id: this.id,
+              name: this.name,
+              count: this.state.count,
+            });
+          }}
+        >
+          <Text>Post</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={() => {
+            this.props.navigation.navigate("Edit", {
+              id: this.id,
+              name: this.name,
+            });
+          }}
+        >
+          <Text>Edit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "cyan",
+            width: 50,
+            height: "100%",
+          }}
+          onPress={this.reload}
+        >
+          <Text>Reload</Text>
+        </TouchableOpacity>
+      </View>
+    );
   };
   render(props) {
     const { navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        {/* <this.Header /> */}
+        <this.Header />
         <View style={styles.top}></View>
         <View style={styles.content}>
-          <View>
-            <View style={{ flex: 1 }}>
-              <Text>Name</Text>
+          <View style={{ flex: 1 }}>
+            <View style={styles.box}>
+              <Text style={styles.text}>Email</Text>
               <TextInput
                 style={styles.text_input}
                 onChangeText={(text) => this.setState({ email: text })}
               />
             </View>
-            <Text>Password</Text>
-            <TextInput
-              style={styles.text_input}
-              onChangeText={(text) => this.setState({ password: text })}
-              secureTextEntry={true}
-            />
-            <TouchableOpacity style={styles.button} onPress={this.on_login}>
-              <Text>Login Google</Text>
-            </TouchableOpacity>
+            <View style={styles.box}>
+              <Text style={styles.text}>Password</Text>
+              <TextInput
+                style={styles.text_input}
+                onChangeText={(text) => this.setState({ password: text })}
+                secureTextEntry={true}
+              />
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity style={styles.button} onPress={this.on_login}>
+                <Text>Login Google</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
@@ -148,15 +232,16 @@ const styles = StyleSheet.create({
   },
   top: {
     backgroundColor: "#aaa",
-    flex: 1,
+    flex: 3,
   },
   content: {
     backgroundColor: "#bbb",
     flex: 2,
+    padding: 20,
   },
   bottom: {
     backgroundColor: "#ccc",
-    flex: 1,
+    flex: 3,
   },
   image: {
     width: "100%",
@@ -172,12 +257,25 @@ const styles = StyleSheet.create({
     borderBottomColor: "gray",
     marginTop: 50,
   },
+  box: {
+    backgroundColor: "#666",
+    flex: 1,
+    flexDirection: "row",
+    marginBottom: 20,
+  },
+  text: {
+    backgroundColor: "cyan",
+    flex: 2,
+    alignSelf: "center",
+  },
   text_input: {
     backgroundColor: "#999",
+    flex: 6,
+    borderRadius: 50,
   },
   button: {
+    flex: 1,
     backgroundColor: "orange",
-    height: 50,
     alignItems: "center",
     justifyContent: "center",
   },
