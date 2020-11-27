@@ -243,11 +243,11 @@ const styles = StyleSheet.create({
   },
   text_input: {
     backgroundColor: "#999",
-    fontSize:18,
+    fontSize:16,
     flex: 0.7,
     borderRadius: 5,
     margin:2,
-    padding: 5
+    padding: 4
   },
   button: {
     flex: 1,

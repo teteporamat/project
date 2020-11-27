@@ -10,6 +10,8 @@ import {
   Dimensions,
 } from "react-native";
 
+import { FontAwesome5 } from '@expo/vector-icons';
+
 import firestore from "./firebase/Firestore";
 
 class Feed extends Component {
@@ -210,7 +212,7 @@ class Feed extends Component {
               firestore.get_post_store(this.accept_store, this.reject);
             }}
           >
-            <Text>♥{item.like}</Text>
+            <Text><FontAwesome5 name="ghost" size={24} color="black" />{item.like}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.icon_right}
