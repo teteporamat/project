@@ -21,6 +21,7 @@ class Feed extends Component {
     this.id = route.params.id;
     this.name = route.params.name;
     console.log(this.id);
+    console.log(this.name);
   }
 
   accept_storage = (querySnapshot) => {
