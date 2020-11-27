@@ -219,7 +219,6 @@ class Login extends Component {
             </View>
           </View>
         </View>
-
         <View style={styles.bottom}></View>
       </View>
     );
