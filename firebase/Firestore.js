@@ -155,7 +155,23 @@ class Firestore {
     console.log("func: Firestore/update_post_share pass");
   };
 
-  update_users = (id, name, password, accept, reject) => {
+  add_users = (user, accept, reject) => {
+    console.log("func: Firestore/add_users");
+    user.date = firebase.firestore.FieldValue.serverTimestamp();
+    firebase
+      .firestore()
+      .collection("users")
+      .add(user)
+      .then(function (docRef) {
+        accept(docRef);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+    console.log("func: Firestore/add_users pass");
+  };
+
+  update_users = (id, name, accept, reject) => {
     console.log("func: Firestore/update_users");
     firebase
       .firestore()
@@ -164,7 +180,6 @@ class Firestore {
       .set(
         {
           name: name,
-          password: password,
         },
         { merge: true }
       )
@@ -175,6 +190,33 @@ class Firestore {
         reject(err);
       });
     console.log("func: Firestore/update_users pass");
+  };
+
+  auth_first = async (email, password, accept, reject) => {
+    console.log("func: Firestore/auth_first");
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        accept(user);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+    console.log("func: Firestore/auth_first pass");
+  };
+  auth = (email, password, accept, reject) => {
+    console.log("func: Firestore/auth");
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        accept(user);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+    console.log("func: Firestore/auth pass");
   };
 }
 

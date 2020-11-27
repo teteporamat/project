@@ -17,7 +17,7 @@ import firestore from "./firebase/Firestore";
 class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: null, name: null, password: null };
+    this.state = { users: [], id: null, name: null };
 
     const { route } = this.props;
     this.id = route.params.id;
@@ -31,19 +31,14 @@ class Edit extends Component {
 
   componentDidMount() {
     console.log("func: Edit/componentDidMount");
+    this.setState({ name: this.name });
     console.log("func: Edit/componentDidMount pass");
   }
 
   on_change = () => {
     console.log("func: Edit/on_change");
-    console.log(this.state.name + " " + this.state.password);
-    firestore.update_users(
-      this.id,
-      this.state.name,
-      this.state.password,
-      this.accept,
-      this.reject
-    );
+    console.log(this.state.name);
+    firestore.update_users(this.id, this.state.name, this.accept, this.reject);
     console.log("func: Edit/on_change pass");
   };
 
@@ -160,12 +155,7 @@ class Edit extends Component {
             <TextInput
               style={styles.text_input}
               onChangeText={(text) => this.setState({ name: text })}
-            />
-            <Text>Password</Text>
-            <TextInput
-              style={styles.text_input}
-              onChangeText={(text) => this.setState({ password: text })}
-              secureTextEntry={true}
+              value={this.state.name}
             />
             <TouchableOpacity onPress={this.on_change}>
               <Text>Change</Text>

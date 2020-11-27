@@ -10,6 +10,7 @@ import Feed from "./Feed";
 import Post from "./Post";
 import Init from "./Init";
 import Edit from "./Edit";
+import Login from "./Login";
 
 const InitScreen = () => {
   const navigation = useNavigation();
@@ -34,10 +35,21 @@ const EditScreen = () => {
   return <Edit navigation={navigation} route={route} />;
 };
 
+const LoginScreen = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  return <Login navigation={navigation} route={route} />;
+};
+
 const Stack = createStackNavigator();
 const MyStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false, title: "Login" }}
+      />
       <Stack.Screen
         name="Init"
         component={InitScreen}
