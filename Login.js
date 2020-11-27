@@ -7,6 +7,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
+  ImageBackground,
   Dimensions,
 } from "react-native";
 
@@ -109,81 +110,40 @@ class Login extends Component {
   Header = () => {
     return (
       <View style={styles.header}>
-        <Text>Edit</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "gray",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={this.call}
-        >
+        <Image style={styles.logo} source={{uri:'https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Flogo-removebg-preview.png?alt=media&token=fb8a3f57-ff29-4f72-be8f-9ff4c0616380'}} ></Image>
+        <TouchableOpacity style={{ backgroundColor: "gray", width: 50, height: "100%", }} onPress={this.call}>
           <Text>Call</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "lime",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={this.check}
-        >
+        <TouchableOpacity style={{ backgroundColor: "lime", width: 50, height: "100%", }} onPress={this.check} >
           <Text>Check</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "orange",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={() => {
+        <TouchableOpacity style={{ backgroundColor: "orange", width: 50, height: "100%", }} onPress={() => {
             this.props.navigation.navigate("Feed", {
               id: this.id,
               name: this.name,
             });
-          }}
-        >
+          }}>
           <Text>Feed</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "pink",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={() => {
+        <TouchableOpacity style={{ backgroundColor: "pink", width: 50, height: "100%", }} onPress={() => { 
             this.props.navigation.navigate("Post", {
               id: this.id,
               name: this.name,
               count: this.state.count,
             });
-          }}
-        >
+          }}>
           <Text>Post</Text>
+          
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "white",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={() => {
+        <TouchableOpacity style={{ backgroundColor: "white", width: 50, height: "100%", }} onPress={() => {
             this.props.navigation.navigate("Edit", {
               id: this.id,
               name: this.name,
             });
-          }}
-        >
+          }}>
           <Text>Edit</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "cyan",
-            width: 50,
-            height: "100%",
-          }}
-          onPress={this.reload}
-        >
+        <TouchableOpacity style={{ backgroundColor: "cyan", width: 50, height: "100%", }} onPress={this.reload}>
           <Text>Reload</Text>
         </TouchableOpacity>
       </View>
@@ -192,9 +152,11 @@ class Login extends Component {
   render(props) {
     const { navigation } = this.props;
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor:"#929392"}}>
         <this.Header />
-        <View style={styles.top}></View>
+        <View style={styles.top}>
+          <ImageBackground source={{uri:'https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Fbg.jpg?alt=media&token=10d220af-9e31-46de-a845-523366e257d8'}} style={styles.image}></ImageBackground>
+        </View>
         <View style={styles.content}>
           <View style={{ flex: 1 }}>
             <View style={styles.box}>
@@ -214,12 +176,14 @@ class Login extends Component {
             </View>
             <View style={styles.box}>
               <TouchableOpacity style={styles.button} onPress={this.on_login}>
-                <Text>Login Google</Text>
+                <Text style={{fontSize:18,color:""}}>Login Google</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
-        <View style={styles.bottom}></View>
+      <View style={styles.bottom}>
+        <ImageBackground source={{uri:'https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Fbg2.jpg?alt=media&token=40efdec1-ecde-4195-9cd3-f765b9df7249'}} style={styles.image}></ImageBackground>
+      </View>
       </View>
     );
   }
@@ -230,8 +194,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    backgroundColor: "#aaa",
-    flex: 3,
+    //backgroundColor: "#aaa",
+    flex: 4,
+    justifyContent: "center",
   },
   content: {
     backgroundColor: "#bbb",
@@ -239,8 +204,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   bottom: {
-    backgroundColor: "#ccc",
-    flex: 3,
+    backgroundColor: "black",
+    flex: 2,
   },
   image: {
     width: "100%",
@@ -248,35 +213,57 @@ const styles = StyleSheet.create({
     backgroundColor: "#dddddd",
   },
   header: {
+    flex:1,
     flexDirection: "row",
-    backgroundColor: "#FFFFFF",
+    justifyContent:"space-around",
+    backgroundColor: "#929392",
     alignItems: "center",
-    height: 70,
+    //height: 20,
     borderBottomWidth: 1,
     borderBottomColor: "gray",
-    marginTop: 50,
+    marginTop: 30,
   },
   box: {
     backgroundColor: "#666",
     flex: 1,
     flexDirection: "row",
-    marginBottom: 20,
+    //alignItems: 'center',
+    //justifyContent:"space-around",
+    borderRadius: 5,
+    margin: 10,
   },
   text: {
-    backgroundColor: "cyan",
-    flex: 2,
-    alignSelf: "center",
+    //backgroundColor: "cyan",
+    fontSize:18,
+    flex: 0.3,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
+    margin:3,
   },
   text_input: {
     backgroundColor: "#999",
-    flex: 6,
-    borderRadius: 50,
+    fontSize:16,
+    flex: 0.7,
+    borderRadius: 5,
+    margin:2,
+    padding: 4
   },
   button: {
     flex: 1,
-    backgroundColor: "orange",
+    backgroundColor: "#60BB2E",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 5,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+  logo:{
+    width:'20%',
+    height:'90%',
   },
 });
 
