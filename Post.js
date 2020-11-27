@@ -196,16 +196,25 @@ class Feed extends Component {
     return (
       <View style={{ flex: 1 }}>
         <this.Header />
-        <View style={{ flex: 1 }}>
-          <View style={styles.content}>
-            <TouchableOpacity onPress={this.pick_image}>
-              <Text style={{ fontSize: 15 }}>Choose Image</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={this.uploadImage}>
-              <Text style={{ fontSize: 15 }}>Upload Image</Text>
-            </TouchableOpacity>
+        <View style={styles.top}></View>
+        <View style={styles.content}>
+          <View style={{ flex: 1 }}>
+            <View style={styles.box}>
+              <TouchableOpacity style={styles.button} onPress={this.pick_image}>
+                <Text>Choose Picture</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.box}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={this.uploadImage}
+              >
+                <Text>Upload</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
+        <View style={styles.bottom}></View>
       </View>
     );
   }
@@ -215,9 +224,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  top: {
+    backgroundColor: "#aaa",
+    flex: 3,
+  },
   content: {
-    flex: 1,
-    width: "100%",
+    backgroundColor: "#bbb",
+    flex: 2,
+    padding: 20,
+  },
+  bottom: {
+    backgroundColor: "#ccc",
+    flex: 3,
   },
   image: {
     width: "100%",
@@ -233,8 +251,22 @@ const styles = StyleSheet.create({
     borderBottomColor: "gray",
     marginTop: 50,
   },
-  icon_like: {
-    backgroundColor: "lime",
+  box: {
+    backgroundColor: "#666",
+    flex: 1,
+    flexDirection: "row",
+    marginBottom: 20,
+  },
+  text: {
+    backgroundColor: "cyan",
+    flex: 2,
+    alignSelf: "center",
+  },
+  button: {
+    flex: 1,
+    backgroundColor: "orange",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

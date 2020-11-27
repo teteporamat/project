@@ -189,41 +189,43 @@ class Feed extends Component {
   renderItem = ({ item }) => {
     return (
       <View style={styles.container}>
-        <Text>{item.name}</Text>
+        <Text style={styles.name}>{item.name}</Text>
         <Image
           source={{
             uri: item.uri,
           }}
           style={styles.image}
         />
-        <TouchableOpacity
-          style={styles.icon_like}
-          onPress={() => {
-            firestore.update_post_like(
-              item.id,
-              item.like,
-              this.accept_update,
-              this.reject
-            );
-            firestore.get_post_store(this.accept_store, this.reject);
-          }}
-        >
-          <Text>♥{item.like}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.icon_like}
-          onPress={() => {
-            firestore.update_post_share(
-              item.id,
-              item.share,
-              this.accept_update,
-              this.reject
-            );
-            firestore.get_post_store(this.accept_store, this.reject);
-          }}
-        >
-          <Text>♫{item.share}</Text>
-        </TouchableOpacity>
+        <View style={styles.box}>
+          <TouchableOpacity
+            style={styles.icon_left}
+            onPress={() => {
+              firestore.update_post_like(
+                item.id,
+                item.like,
+                this.accept_update,
+                this.reject
+              );
+              firestore.get_post_store(this.accept_store, this.reject);
+            }}
+          >
+            <Text>♥{item.like}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.icon_right}
+            onPress={() => {
+              firestore.update_post_share(
+                item.id,
+                item.share,
+                this.accept_update,
+                this.reject
+              );
+              firestore.get_post_store(this.accept_store, this.reject);
+            }}
+          >
+            <Text>{item.share}♫</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
@@ -232,7 +234,7 @@ class Feed extends Component {
     return (
       <View
         style={{
-          height: 8,
+          height: 10,
         }}
       />
     );
@@ -267,7 +269,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    width: "100%",
   },
   image: {
     width: "100%",
@@ -283,8 +284,24 @@ const styles = StyleSheet.create({
     borderBottomColor: "gray",
     marginTop: 50,
   },
-  icon_like: {
+  box: {
+    flex: 1,
+    flexDirection: "row",
+    height: 50,
+  },
+  name: {
+    marginLeft: 20,
+  },
+  icon_left: {
     backgroundColor: "lime",
+    flex: 1,
+    marginLeft: 20,
+  },
+  icon_right: {
+    backgroundColor: "cyan",
+    flex: 1,
+    flexDirection: "row-reverse",
+    marginLeft: 20,
   },
 });
 
