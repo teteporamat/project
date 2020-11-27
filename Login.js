@@ -110,40 +110,63 @@ class Login extends Component {
   Header = () => {
     return (
       <View style={styles.header}>
-        <Image style={styles.logo} source={{uri:'https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Flogo-removebg-preview.png?alt=media&token=fb8a3f57-ff29-4f72-be8f-9ff4c0616380'}} ></Image>
-        <TouchableOpacity style={{ backgroundColor: "gray", width: 50, height: "100%", }} onPress={this.call}>
+        <Image
+          style={styles.logo}
+          source={{
+            uri:
+              "https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Flogo-removebg-preview.png?alt=media&token=fb8a3f57-ff29-4f72-be8f-9ff4c0616380",
+          }}
+        ></Image>
+        <TouchableOpacity
+          style={{ backgroundColor: "gray", width: 50, height: "100%" }}
+          onPress={this.call}
+        >
           <Text>Call</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "lime", width: 50, height: "100%", }} onPress={this.check} >
+        <TouchableOpacity
+          style={{ backgroundColor: "lime", width: 50, height: "100%" }}
+          onPress={this.check}
+        >
           <Text>Check</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "orange", width: 50, height: "100%", }} onPress={() => {
+        <TouchableOpacity
+          style={{ backgroundColor: "orange", width: 50, height: "100%" }}
+          onPress={() => {
             this.props.navigation.navigate("Feed", {
               id: this.id,
               name: this.name,
             });
-          }}>
+          }}
+        >
           <Text>Feed</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "pink", width: 50, height: "100%", }} onPress={() => { 
+        <TouchableOpacity
+          style={{ backgroundColor: "pink", width: 50, height: "100%" }}
+          onPress={() => {
             this.props.navigation.navigate("Post", {
               id: this.id,
               name: this.name,
               count: this.state.count,
             });
-          }}>
+          }}
+        >
           <Text>Post</Text>
-          
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "white", width: 50, height: "100%", }} onPress={() => {
+        <TouchableOpacity
+          style={{ backgroundColor: "white", width: 50, height: "100%" }}
+          onPress={() => {
             this.props.navigation.navigate("Edit", {
               id: this.id,
               name: this.name,
             });
-          }}>
+          }}
+        >
           <Text>Edit</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "cyan", width: 50, height: "100%", }} onPress={this.reload}>
+        <TouchableOpacity
+          style={{ backgroundColor: "cyan", width: 50, height: "100%" }}
+          onPress={this.reload}
+        >
           <Text>Reload</Text>
         </TouchableOpacity>
       </View>
@@ -152,10 +175,16 @@ class Login extends Component {
   render(props) {
     const { navigation } = this.props;
     return (
-      <View style={{ flex: 1, backgroundColor:"#929392"}}>
-        <this.Header />
+      <View style={{ flex: 1, backgroundColor: "black" }}>
+        {/* <this.Header /> */}
         <View style={styles.top}>
-          <ImageBackground source={{uri:'https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Fbg.jpg?alt=media&token=10d220af-9e31-46de-a845-523366e257d8'}} style={styles.image}></ImageBackground>
+          <ImageBackground
+            source={{
+              uri:
+                "https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Fbg.jpg?alt=media&token=10d220af-9e31-46de-a845-523366e257d8",
+            }}
+            style={styles.image}
+          ></ImageBackground>
         </View>
         <View style={styles.content}>
           <View style={{ flex: 1 }}>
@@ -176,14 +205,20 @@ class Login extends Component {
             </View>
             <View style={styles.box}>
               <TouchableOpacity style={styles.button} onPress={this.on_login}>
-                <Text style={{fontSize:18,color:""}}>Login Google</Text>
+                <Text style={{ fontSize: 18 }}>Login Google</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
-      <View style={styles.bottom}>
-        <ImageBackground source={{uri:'https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Fbg2.jpg?alt=media&token=40efdec1-ecde-4195-9cd3-f765b9df7249'}} style={styles.image}></ImageBackground>
-      </View>
+        <View style={styles.bottom}>
+          {/* <ImageBackground
+            source={{
+              uri:
+                "https://firebasestorage.googleapis.com/v0/b/myproject-75fab.appspot.com/o/image%2Fbg2.jpg?alt=media&token=40efdec1-ecde-4195-9cd3-f765b9df7249",
+            }}
+            style={styles.image}
+          ></ImageBackground> */}
+        </View>
       </View>
     );
   }
@@ -202,6 +237,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#bbb",
     flex: 2,
     padding: 20,
+    margin: 20,
   },
   bottom: {
     backgroundColor: "black",
@@ -213,9 +249,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#dddddd",
   },
   header: {
-    flex:1,
+    flex: 1,
     flexDirection: "row",
-    justifyContent:"space-around",
+    justifyContent: "space-around",
     backgroundColor: "#929392",
     alignItems: "center",
     //height: 20,
@@ -224,7 +260,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   box: {
-    backgroundColor: "#666",
+    // backgroundColor: "#666",
     flex: 1,
     flexDirection: "row",
     //alignItems: 'center',
@@ -234,36 +270,36 @@ const styles = StyleSheet.create({
   },
   text: {
     //backgroundColor: "cyan",
-    fontSize:18,
-    flex: 0.3,
+    fontSize: 18,
+    flex: 0.4,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
-    margin:3,
+    margin: 3,
   },
   text_input: {
     backgroundColor: "#999",
-    fontSize:16,
+    fontSize: 16,
     flex: 0.7,
-    borderRadius: 5,
-    margin:2,
-    padding: 4
+    borderRadius: 50,
+    margin: 2,
+    padding: 4,
   },
   button: {
     flex: 1,
-    backgroundColor: "#60BB2E",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5,
+    borderRadius: 50,
   },
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center"
+    justifyContent: "center",
   },
-  logo:{
-    width:'20%',
-    height:'90%',
+  logo: {
+    width: "20%",
+    height: "90%",
   },
 });
 
